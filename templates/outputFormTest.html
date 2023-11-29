@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html class="form">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+
+    <!-- IMPORT ICON -->
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../static/images/beep.ico"
+    />
+
+    <!-- IMPORT CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      select:required:invalid {
+        color: rgb(172, 172, 172);
+      }
+      option {
+        color: black;
+      }
+    </style>
+    <title>Form | Traffic Prediction</title>
+  </head>
+  <body class="font-sans bg-gray-300 text">
+    <div class="container mx-auto">
+      <div class="flex justify-center px-6 my-8">
+        <div
+          class="md:w-1/2 bg-white rounded shadow-xl ring-1 ring-gray-900/5 px-10"
+        >
+          <a href="/">
+            <button
+              class="font-bold underline mt-6 hover:text-blue-500 hover:background-white transition-all"
+            >
+              Back
+            </button></a
+          >
+          <div class="text-center mt-3 text-2xl font-bold">OUTPUT FORM</div>
+          <form class="block mt-2 rounded-lg" action="/result" method="POST">
+            <div class="mb-4">
+              <label class="block text-gray-700 font-bold mb-1" for="day">
+                Hasil
+              </label>
+              <div>
+                <p class="block font-bold">{{prediction}}</p>
+                <p>Day: {{day}}</p>
+                <p>Time: {{time}}</p>
+                <p>CarCount: {{car}}</p>
+                <p>BikeCount: {{bike}}</p>
+                <p>BusCount: {{bus}}</p>
+                <p>TruckCount: {{truck}}</p>
+                <p>Count: {{count}}</p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

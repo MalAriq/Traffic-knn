@@ -1,22 +1,24 @@
 from flask import Flask, render_template, request
 import pickle
+import joblib
 import numpy as np
 import pandas as pd
 import sklearn
 
 
-def time_to_seconds(time_str):
-    hours, minutes = map(int, time_str.split(":"))
-    return hours * 3600 + minutes * 60
+# def time_to_seconds(time_str):
+#     hours, minutes = map(int, time_str.split(":"))
+#     return hours * 3600 + minutes * 60
 
+# pickle.load(open(".\static\models\model.pkl", "rb"))
 
-knn = pickle.load(open(".\static\models\model.pkl", "rb"))
+nb = joblib.load(".\static\models\model.pkl")
 
 
 def trafficPrediction(data):
     data = np.array(data).reshape(1, -1)
     # Get the prediction
-    result = knn.predict(data)
+    result = nb.predict(data)
     return result
 
 
@@ -57,13 +59,15 @@ def result():
         count = car_count + bike_count + bus_count + truck_count
 
         to_predict_list = [
-            day,
-            time_in_seconds,
-            car_count,
-            bike_count,
-            bus_count,
-            truck_count,
-            count,
+            [
+                time_in_seconds,
+                day,
+                car_count,
+                bike_count,
+                bus_count,
+                truck_count,
+                count,
+            ]
         ]
         result = trafficPrediction(to_predict_list)
 
@@ -76,7 +80,18 @@ def result():
         elif float(result) == 3:
             prediction = "Heavy"
 
-        return render_template("output.html", prediction=prediction)
+        return render_template(
+            "outputFormTest.html",
+            prediction=prediction,
+            day=day,
+            time=time_in_seconds,
+            car=car_count,
+            bike=bike_count,
+            bus=bus_count,
+            truck=truck_count,
+            count=count,
+        )
+        # return render_template("output.html", prediction=prediction)
 
 
 if __name__ == "__main__":
