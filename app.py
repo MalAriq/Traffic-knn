@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import sklearn
 
-nb = pickle.load(open("model.pkl", "rb"))
+nb = pickle.load(open("traffic.pkl", "rb"))
 
 
 def trafficPrediction(data):
@@ -35,22 +35,15 @@ def result():
     if request.method == "POST":
         # Mengambil data dari form
         day = float(request.form["day"])
-        time = request.form["time"]
         car_count = float(request.form["car"])
         bike_count = float(request.form["bike"])
         bus_count = float(request.form["bus"])
         truck_count = float(request.form["truck"])
 
-        time_in_seconds = (
-            pd.to_datetime(time).hour * 3600
-            + pd.to_datetime(time).minute * 60
-            + pd.to_datetime(time).second
-        )
         count = car_count + bike_count + bus_count + truck_count
 
         to_predict_list = [
             [
-                time_in_seconds,
                 day,
                 car_count,
                 bike_count,
