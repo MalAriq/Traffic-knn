@@ -65,6 +65,64 @@
             </div>
 
             <div class="mb-4">
+              <label class="block text-gray-700 font-bold mb-1" for="hour">
+                Hour
+              </label>
+              <select
+                required
+                id="hour"
+                name="hour"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option value="" disabled selected hidden>Select Hour</option>
+                <script>
+                  for (let i = 1; i <= 12; i++) {
+                    document.write(
+                      '<option value="' + i + '">' + i + "</option>"
+                    );
+                  }
+                </script>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-gray-700 font-bold mb-1" for="minute">
+                Minute
+              </label>
+              <select
+                required
+                id="minute"
+                name="minute"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option value="" disabled selected hidden>Select Minute</option>
+                <script>
+                  for (let i = 1; i <= 60; i++) {
+                    document.write(
+                      '<option value="' + i + '">' + i + "</option>"
+                    );
+                  }
+                </script>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-gray-700 font-bold mb-1" for="ampm">
+                AM/PM
+              </label>
+              <select
+                required
+                id="am_pm"
+                name="am_pm"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option value="" disabled selected hidden>Select AM/PM</option>
+                <option value="0">AM</option>
+                <option value="1">PM</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
               <label class="block text-gray-700 font-bold mb-1" for="car">
                 Car Count
               </label>

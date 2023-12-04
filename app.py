@@ -4,13 +4,13 @@ import numpy as np
 import pandas as pd
 import sklearn
 
-nb = pickle.load(open("traffic.pkl", "rb"))
+knn = pickle.load(open("knn.pkl", "rb"))
 
 
 def trafficPrediction(data):
     data = np.array(data).reshape(1, -1)
     # Get the prediction
-    result = nb.predict(data)
+    result = knn.predict(data)
     return result
 
 
@@ -39,7 +39,9 @@ def result():
         bike_count = float(request.form["bike"])
         bus_count = float(request.form["bus"])
         truck_count = float(request.form["truck"])
-
+        hour = float(request.form["hour"])
+        minute = float(request.form["minute"])
+        am_pm = float(request.form["am_pm"])
         count = car_count + bike_count + bus_count + truck_count
 
         to_predict_list = [
@@ -50,6 +52,9 @@ def result():
                 bus_count,
                 truck_count,
                 count,
+                hour,
+                minute,
+                am_pm
             ]
         ]
         result = trafficPrediction(to_predict_list)
